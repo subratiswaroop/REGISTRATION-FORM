@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="from" action="#" onsubmit="return sub()">
+            <h2>Registration Form</h2>
+            <label for="fname">First name</label>
+            <input type="text" id="fname"><br><span id="fn"></span><br>
+            <label for="lname">last name</label>
+            <input type="text" name="" id="lname"><br><span id="ln"></span><br>
+            <label for="phone">phone number</label>
+            <input type="tel" id="phone"><br><span id="ph"></span><br>
+            <label>email</label>
+            <input type="email" id="email"><br><span id="em"></span><br>
+            <label>password</label>
+            <input type="password" id="pass"><br>
+            <button id="btn1" onclick="show()">show password</button><br><span id="ps"></span>
+            <span id="msg"></span>
+            <span id="msg1"></span><span id="msg2"></span><span id="msg3"></span><span id="msg4"></span>
+            <br> <label>confirm password</label>
+            <input type="password" id="c_pass"><br><span id="cps"></span><br>
+            <button id="btn">submit</button>
+        </form>
+    </div>
+</body>
+<script>
+    let fname = document.getElementById("fname")
+    let lname = document.getElementById("lname")
+    let email = document.getElementById("email")
+    let pass = document.getElementById("pass")
+    let phone = document.getElementById("phone")
+    let cpass = document.getElementById("c_pass")
+    let chk =document.getElementById("checkbox")
+    document.getElementById("btn").addEventListener("click", function () {
+        if (fname.value === "") {
+            document.getElementById("fn").textContent = "please enter first name"
+        } else if (lname.value === "") {
+            document.getElementById("ln").textContent = "please enter last name"
+
+        } else if (phone.value === "") {
+            document.getElementById("ph").textContent = "please enter phone number"
+
+        }
+        else if (email.value === "") {
+            document.getElementById("em").textContent = "please enter email address"
+        
+        }
+        else if (pass.value === "") {
+            document.getElementById("ps").textContent = "please enter password"
+        } else if (cpass.value === "") {
+            document.getElementById("cps").textContent = "please enter confirm password"
+            
+        }
+        else if (pass.value != cpass.value) {
+            document.getElementById("cps").textContent = "Password and Confirm Password are not same"
+        }
+        else {
+            alert('success')
+        
+
+        }
+    })
+
+    fname.addEventListener("input", function () {
+        document.getElementById("fn").textContent = ""
+    })
+    lname.addEventListener("input", function () {
+        document.getElementById("ln").textContent = ""
+    })
+    email.addEventListener("input", function () {
+        document.getElementById("em").textContent = ""
+    })
+    phone.addEventListener("input", function () {
+        document.getElementById("ps").textContent = ""
+        if (phone.value.length !== 10 || phone.value.match(/[a-z]/)) {
+            document.getElementById('ph').innerHTML = 'please enter valid number'
+            if (phone.value === "") {
+                document.getElementById('ph').innerHTML = ""
+            }
+        }else{
+            document.getElementById('ph').innerHTML = ''
+        }
+    })
+    pass.addEventListener("input", function () {
+        document.getElementById("ps").textContent = ""
+        pass.style.borderColor = "black"
+
+    })
+    cpass.addEventListener("input", function () {
+        document.getElementById("cps").textContent = ""
+    })
+    function show() {
+        var sh = document.getElementById("show");
+        if (pass.value === "") {
+            pass.style.borderColor = "red"
+        }
+        else if (pass.type === "password") {
+            pass.type = "text";
+            document.getElementById("btn1").textContent = "hide password";
+        } else {
+            (pass.type = "password");
+            pass.type = "password"
+            document.getElementById("btn1").textContent = "show password";
+        }
+    }
+    pass.addEventListener('input', function () {
+        if (pass.value.match(/[a-z]/)) {
+            document.getElementById("msg").innerHTML = 'password contain at least one uppercase letter'
+            // if(pass.value.match(/[!#$%&? "]/) || pass.value.match(/[0-9]/)){
+            //     document.getElementById("msg").innerHTML = ""
+            // }
+        }
+        else {
+            document.getElementById("msg").innerHTML = ""
+        }
+        if (pass.value.match(/[A-Z]/)) {
+            document.getElementById("msg").innerHTML = ""
+            document.getElementById("msg1").innerHTML = 'password contain at least one special letter'
+        } else {
+            document.getElementById("msg1").innerHTML = ""
+        }
+        if (pass.value.match(/[!#$%&? "]/)) {
+            document.getElementById("msg1").innerHTML = ""
+            document.getElementById("msg2").innerHTML = 'password contain at least one number character'
+        } else {
+            document.getElementById("msg2").innerHTML = ""
+        }
+        if (pass.value.match(/[0-9]/)) {
+            document.getElementById("msg2").innerHTML = ""
+            document.getElementById("msg3").innerHTML = 'password length must be more then 8'
+        }
+        else {
+            document.getElementById("msg3").innerHTML = ""
+        }
+        if (pass.value.match(/.{8,}/)) {
+            document.getElementById("msg3").innerHTML = ""
+            document.getElementById("msg4").innerHTML = 'password contain at least one lower character'
+            if(pass.value.match(/[a-z]/) || pass.value.match(/[A-Z]/) || pass.value.match(/[!#$%&? "]/)){
+                document.getElementById("msg4").innerHTML = ""
+            }
+        }
+        else {
+            document.getElementById("msg4").innerHTML = ""
+        }
+        if (pass.value.match(/[a-z]/) && pass.value.match(/[A-Z]/) && pass.value.match(/[!#$%&? "]/) && pass.value.match(/[0-9]/) && pass.value.match(/.{8,}/)) {
+            document.getElementById("msg4").innerHTML = ""
+            document.getElementById("msg3").innerHTML = ""
+            document.getElementById("msg2").innerHTML = ""
+            document.getElementById("msg1").innerHTML = ""
+            document.getElementById("msg").innerHTML = ""
+        }
+    })
+
+
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    span {
+        color: whitesmoke;
+        
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url(https://wallpapercave.com/wp/wp2088569.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+
+    #btn1 {
+        background-color: transparent;
+        border: none;
+        color: #ffffff80;
+        text-decoration: underline;
+        text-transform: uppercase;
+
+    }
+
+    .from {
+        padding: 3em;
+        border-radius: 20px;
+        backdrop-filter: blur(70px);
+        box-shadow: 20px 20px 40px -10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        filter: blur(-50px);
+    }
+
+    input {
+        background: transparent;
+        width: 150px;
+        padding: 10px;
+        border-radius: 500px;
+        backdrop-filter: blur(10px);
+        box-shadow: 4px 4px 70px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: 2rem;
+        margin: 20px;
+        color: rgb(7, 7, 50);
+        font-style: italic;
+        text-transform: uppercase;
+
+    }
+
+    #btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: #ffffff80;
+        background: transparent;
+        border: 1px solid #ffffff80;
+        transition: 0.5s ease;
+        text-transform: uppercase;
+    }
+
+    #btn:hover{
+        color:#ffffff ;
+        background: #008cff ;
+        border: 1px solid #008cff;
+        box-shadow:#008cff 10px 22px 100px 20px;
+    }
+    label{
+        text-transform: uppercase;
+        padding-right: 10px;
+    }
+</style>
+
+</html>
